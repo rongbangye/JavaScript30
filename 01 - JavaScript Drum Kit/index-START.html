@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-
-
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -57,29 +57,34 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
-  function playHandler(e) {
-    //play music
-    console.log(e)
-    let audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
-    if (audio) {
-      audio.play()
-      audio.currentTime = 0
-    }
-    //add play class
-    let div = document.querySelector(`div[data-key="${e.keyCode}"`)
-    if (div) { div.classList.add('playing') }
-  }
+  <script>
+    (function () {
+      function playHandler(e) {
+        // play
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
 
-  function transitionEnd(e) {
-    console.log(e)
-    if (e.propertyName === 'transform') e.target.classList.remove('playing')
-  }
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play();
+        }
 
-  const key =  document.querySelectorAll('.key')
-  key.forEach(key => key.addEventListener('transitionend', transitionEnd))
-  window.addEventListener('keydown', playHandler);
-</script>
+        // style
+        const dom = document.querySelector(`div[data-key="${e.keyCode}"]`);
+        if (dom) dom.classList.add("playing");
+      }
 
+      function transitionendHandler(e) {
+        if (e.propertyName == "transform") {
+          e.currentTarget.classList.remove("playing");
+        }
+      }
+
+      window.addEventListener("keydown", playHandler);
+      document.querySelectorAll(".key").forEach(function (key) {
+        key.addEventListener("transitionend", transitionendHandler);
+      });
+    })();
+  </script>
 </body>
+
 </html>
