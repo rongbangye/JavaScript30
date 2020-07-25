@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Console Tricks!</title>
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
@@ -17,30 +19,111 @@
       p.style.fontSize = '50px';
     }
 
+    // 
+    let console = {
+      isDev: true,
+      log(...args) {
+        if (!this.isDev) return;
+        window.console.log(...args);
+      },
+      warn(...args) {
+        if (!this.isDev) return;
+        window.console.warn(...args);
+      },
+      info(...args) {
+        if (!this.isDev) return;
+        window.console.info(...args);
+      },
+      assert(...args) {
+        if (!this.isDev) return;
+        window.console.assert(...args);
+      },
+      dir(...args) {
+        if (!this.isDev) return;
+        window.console.dir(...args);
+      },
+      table(...args) {
+        if (!this.isDev) return;
+        window.console.table(...args);
+      },
+      count(...args) {
+        if (!this.isDev) return;
+        window.console.count(...args);
+      },
+      time(...args) {
+        if (!this.isDev) return;
+        window.console.time(...args);
+      },
+      timeEnd(...args) {
+        if (!this.isDev) return;
+        window.console.timeEnd(...args);
+      }
+    }
+
     // Regular
+    console.log(dogs);
 
     // Interpolated
+    console.log('Hello I am a %s string!', '💩');
 
     // Styled
+    console.log('%c I am some great text', 'font-size:50px; background:red;');
 
     // warning!
+    console.warn("Warning");
 
     // Error :|
+    // console.error("SHIT");
 
     // Info
+    console.info("Similar to log");
 
     // Testing
+    console.assert(true, "passed");
+    console.assert(false, "passed");
+    console.assert("", "passed");
+    console.assert(0, "passed");
+    console.assert(NaN, "passed");
+    // console.assert(Null, "passed");
+    // console.assert(undefined, "passed");
 
     // clearing
-
+    // console.clear();
+    // CTRL+L
+    
     // Viewing DOM Elements
+    let p = document.querySelector("p");
+    console.dir(p);
+    console.dir(dogs);
 
     // Grouping together
+    console.table(dogs);
+    console.table(dogs, ['name']);
 
     // counting
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
 
     // timing
+    console.time("fetching data");
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      })
 
   </script>
 </body>
+
 </html>
